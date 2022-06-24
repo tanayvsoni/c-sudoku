@@ -9,17 +9,19 @@
 #define RESET     "\x1b[0m"
 
 void display_screen(int arr[9][9]){
-   
-   printf("---------+---------+--------\n");
+
+   char divider[35] = "+---------+---------+---------+";
+   printf("%s\n", divider);
    for (int i = 0; i < 9; i++) {
 
       for (int j = 0; j < 9; j++) {
 
-         if(j != 0 && j % 3 == 0){printf("|");}
+         if(j == 0 || j % 3 == 0){printf("|");}
          printf(" %d ", arr[i][j]);
+         if((j+1) == 9){printf("|");}
       }
       printf("\n");
-      if((i+1) % 3 == 0){printf("---------+---------+--------\n");}
+      if((i+1) % 3 == 0){printf("%s\n", divider);}
    }
 }
 
