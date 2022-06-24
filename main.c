@@ -1,16 +1,9 @@
 #include <stdio.h>
 
-#define RED       "\x1b[31m"
-#define GREEN     "\x1b[32m"
-#define YELLOW    "\x1b[33m"
-#define BLUE      "\x1b[34m"
-#define MAGENTA   "\x1b[35m"
-#define CYAN      "\x1b[36m"
-#define RESET     "\x1b[0m"
-
 void display_screen(int arr[9][9]){
 
    char divider[35] = "+---------+---------+---------+";
+
    printf("%s\n", divider);
    for (int i = 0; i < 9; i++) {
 
@@ -23,6 +16,10 @@ void display_screen(int arr[9][9]){
       printf("\n");
       if((i+1) % 3 == 0){printf("%s\n", divider);}
    }
+}
+
+int **createPuzzle(){
+
 }
 
 int main(void) {
