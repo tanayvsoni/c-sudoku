@@ -8,7 +8,24 @@
 #define CYAN      "\x1b[36m"
 #define RESET     "\x1b[0m"
 
-int main() {
+void display_screen(int arr[9][9]){
+
+   for (int i = 0; i < 9; i++) {
+
+      for (int j = 0; j < 9; j++) {
+
+         if (i < 3 && j < 3) {
+            printf(RED "%d" RESET, arr[i][j]);
+         }
+         else {
+            printf("%d", arr[i][j]);
+         }
+      }
+      printf("\n");
+   }
+}
+
+int main(void) {
 
    // Initialize empty Array
    int my_array[9][9] = {};
@@ -25,21 +42,4 @@ int main() {
    getchar();
 
    return 0;
-}
-
-void display_screen(int arr[9][9]){
-
-   for (int i = 0; i < 9; i++) {
-
-      for (int j = 0; j < 9; j++) {
-
-         if (i < 3 && j < 3) {
-            printf(RED "%d" RESET, arr[i][j]);
-         }
-         else {
-            printf("%d", arr[i][j]);
-         }
-      }
-      printf("\n");
-   }
 }
