@@ -25,5 +25,7 @@ int main()
    int age;
    scanf("%d",age);
 
+   printf("Hello World");
+   
    return 0;
 }
