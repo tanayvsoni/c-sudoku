@@ -20,14 +20,34 @@ void display_screen(int arr[9][9]){
    }
 }
 
+bool in_Row_col(int arr[9][9],int num, int row,int col){
+   int i,j;
+
+
+   //Checks if number is present in row
+   for(j = 0; j < 9; j++){
+      if(arr[row][j] == num){return true;}
+   }
+
+   //Checks if number is present in col
+   for(i = 0; i < 9; i++){
+      if(arr[i][col] == num){return true;}
+   }
+
+   return false;
+}
+
 void createPuzzle(){
    int my_array[9][9] = {};
-   int num;
+   int num = 0;
    int i,j;
 
    for(i = 0; i < 9; i++){
       for(j = 0; j < 9; j++){
          num = rand() % 10;
+         while(in_Row_col(my_array,num,i,j)){
+            num = rand() % 10;
+         }
          my_array[i][j] = num;
       }
    }
