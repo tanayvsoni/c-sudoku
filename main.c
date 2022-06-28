@@ -23,14 +23,14 @@ void display_screen(int **puzzle){
 int **createPuzzle(){
    int **puzzle;
     
-   puzzle = (int**)malloc(sizeof(int*)*9);
+   puzzle = malloc(sizeof(int*)*9);
 
    int my_array[9][9] = {};
    int num = 0;
    int i,j;
 
    for(i = 0; i < 9; i++){
-      puzzle[i] = (int*)malloc(sizeof(int)*9);
+      puzzle[i] = malloc(sizeof(int)*9);
       for(j = 0; j < 9; j++){
          num = rand() % 10;
          my_array[i][j] = num;
