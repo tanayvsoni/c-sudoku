@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
 void display_screen(int **puzzle){
 
@@ -20,30 +21,56 @@ void display_screen(int **puzzle){
    }
 }
 
-int **createPuzzle(){
+bool isNumUsed(int *arr, int num){
+   for(int i = 0; i < 9; i++){
+      if(arr[i] == num){
+         return true;
+      }
+   }
+
+   return false;
+}
+
+int **createBasePuzzle(){
    int **puzzle;
-    
    puzzle = malloc(sizeof(int*)*9);
 
-   int my_array[9][9] = {};
-   int num = 0;
+   int my_array[9][9] = {0};
    int i,j;
 
    for(i = 0; i < 9; i++){
       puzzle[i] = malloc(sizeof(int)*9);
       for(j = 0; j < 9; j++){
-         num = rand() % 10;
-         my_array[i][j] = num;
          puzzle[i][j] = my_array[i][j];
       }
    }
-
+    
    return puzzle;
+}
+
+int generateSudoku(int **puzzle){
+   int *arr = malloc(sizeof(int)*9);
+
+   int num = 0
+
+   srand(time(NULL));
+   
+   while(true){
+      for(int i = 0; i < 9; i++){
+         num = (rand() % 9) + 1;
+         if(!isNumUsed(arr,num)){
+            arr[i] = num;
+         }
+      }
+      
+   }
 }
 
 int main(void) {
 
-   int **puzzle = createPuzzle();
+   int **puzzle = createBasePuzzle();
+
+   puzzle = generateSudoku(puzzle);
 
    display_screen(puzzle);
 
