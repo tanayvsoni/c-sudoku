@@ -48,24 +48,6 @@ int **createBasePuzzle(){
    return puzzle;
 }
 
-int generateSudoku(int **puzzle){
-   int *arr = malloc(sizeof(int)*9);
-
-   int num = 0
-
-   srand(time(NULL));
-   
-   while(true){
-      for(int i = 0; i < 9; i++){
-         num = (rand() % 9) + 1;
-         if(!isNumUsed(arr,num)){
-            arr[i] = num;
-         }
-      }
-      
-   }
-}
-
 int main(void) {
 
    int **puzzle = createBasePuzzle();
