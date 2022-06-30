@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 void rotate_arr(int *arr, int rotate_amount){
@@ -17,6 +18,27 @@ void rotate_arr(int *arr, int rotate_amount){
       arr[0] = last;
    }
 
+}
+
+void swap(int **puzzle){
+   srand(time(NULL));
+   int swap[2] = {0};
+   
+   for(int i = 0; i < 3; i++){
+      int upper = (i*3+3);
+      int lower = i*3;
+
+      while(swap[0] == swap[1]){
+         swap[0] = (rand() % (upper - lower + 1)) + lower;
+         swap[1] = (rand() % (upper - lower + 1)) + lower;
+      }
+
+      int *temp = puzzle[swap[0]];
+      puzzle[swap[0]] = puzzle[swap[1]];
+      puzzle[swap[1]] = temp;
+
+      memset(swap,0,sizeof(swap));
+   }
 }
 
 void display_screen(int **puzzle){
@@ -81,8 +103,10 @@ void generateSudoku(int **puzzle){
       }
       rotate_arr(arr, 3);
    }
-
    
+   //display_screen(puzzle);
+
+   swap(puzzle);
 
 
 }
