@@ -29,8 +29,8 @@ void swap(int **puzzle){
       int lower = i*3;
 
       while(swap[0] == swap[1]){
-         swap[0] = (rand() % (upper - lower + 1)) + lower;
-         swap[1] = (rand() % (upper - lower + 1)) + lower;
+         swap[0] = (rand() % (upper - lower)) + lower;
+         swap[1] = (rand() % (upper - lower)) + lower;
       }
 
       int *temp = puzzle[swap[0]];
