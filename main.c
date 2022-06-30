@@ -62,7 +62,7 @@ void generateSudoku(int **puzzle){
    int choices[9] = {1,2,3,4,5,6,7,8,9};
    int length_choices = sizeof(choices)/sizeof(int);
 
-   /*Get random row to use to make sudoku*/
+   /*Get a array with random ints to use to make sudoku*/
    for(int i = 0; i < 9; i++){
       int random_index = rand() % length_choices;
       arr[i] = choices[random_index];
@@ -74,11 +74,19 @@ void generateSudoku(int **puzzle){
       length_choices -= 1;
    }
 
-   printf("\n");
-   rotate_arr(arr, 3);
+   /* Fill puzzle with rotated values of array*/
+   for(int i = 0; i < 9; i++){
+      for(int j = 0; j < 9; j++){
+         puzzle[i][j] = arr[j];
+      }
+      rotate_arr(arr, 3);
+   }
+
    
-   for(int i = 0; i < 9; i++){printf(" %d ", arr[i]);}
+
+
 }
+
 
 int main(void) {
 
@@ -86,7 +94,7 @@ int main(void) {
 
    generateSudoku(puzzle);
 
-   //display_screen(puzzle);
+   display_screen(puzzle);
 
    return 0;
 }
