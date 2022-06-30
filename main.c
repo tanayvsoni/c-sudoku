@@ -39,6 +39,8 @@ void swap(int **puzzle){
 
       memset(swap,0,sizeof(swap));
    }
+
+   
 }
 
 void display_screen(int **puzzle){
@@ -103,8 +105,6 @@ void generateSudoku(int **puzzle){
       }
       rotate_arr(arr, 3);
    }
-   
-   //display_screen(puzzle);
 
    swap(puzzle);
 
