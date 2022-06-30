@@ -21,16 +21,6 @@ void display_screen(int **puzzle){
    }
 }
 
-bool isNumUsed(int *arr, int num){
-   for(int i = 0; i < 9; i++){
-      if(arr[i] == num){
-         return true;
-      }
-   }
-
-   return false;
-}
-
 int **createBasePuzzle(){
    int **puzzle;
    puzzle = malloc(sizeof(int*)*9);
@@ -45,6 +35,33 @@ int **createBasePuzzle(){
       }
    }
     
+   return puzzle;
+}
+
+int **generateSudoku(int **puzzle){
+   
+   srand(time(NULL));
+   int i,j;
+   int choices[9] = {1,2,3,4,5,6,7,8,9};
+   int init_row[9] = {};
+   int length_choices = sizeof(choices)/sizeof(int);
+
+   /*Get random row to use to make sudoku*/
+   for(i = 0; i < 9; i++){
+      int random_index = rand() % length_choices;
+      init_row[i] = choices[random_index];
+
+      for(j = random_index; j < length_choices-1; j++){
+         choices[j] = choices[j+1];
+      }
+
+      length_choices -= 1;
+
+      printf(" %d ", init_row[i]);
+   }
+
+
+
    return puzzle;
 }
 
