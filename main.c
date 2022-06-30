@@ -1,7 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <time.h>
+
+void rotate_arr(int *arr, int rotate_amount){
+   int length_arr = 9;
+
+   for(int i = 0; i < rotate_amount; i++){
+      int j,last;
+
+      last = arr[length_arr-1];
+
+      for(j = length_arr-1; j > 0; j--){
+         arr[j] = arr[j-1];
+      }
+
+      arr[0] = last;
+   }
+
+}
 
 void display_screen(int **puzzle){
 
@@ -38,40 +54,39 @@ int **createBasePuzzle(){
    return puzzle;
 }
 
-int **generateSudoku(int **puzzle){
-   
+void generateSudoku(int **puzzle){
    srand(time(NULL));
-   int i,j;
+
+   int *arr = malloc(sizeof(int)*9);
+
    int choices[9] = {1,2,3,4,5,6,7,8,9};
-   int init_row[9] = {};
    int length_choices = sizeof(choices)/sizeof(int);
 
    /*Get random row to use to make sudoku*/
-   for(i = 0; i < 9; i++){
+   for(int i = 0; i < 9; i++){
       int random_index = rand() % length_choices;
-      init_row[i] = choices[random_index];
+      arr[i] = choices[random_index];
 
-      for(j = random_index; j < length_choices-1; j++){
+      for(int j = random_index; j < length_choices-1; j++){
          choices[j] = choices[j+1];
       }
 
       length_choices -= 1;
-
-      printf(" %d ", init_row[i]);
    }
 
-
-
-   return puzzle;
+   printf("\n");
+   rotate_arr(arr, 3);
+   
+   for(int i = 0; i < 9; i++){printf(" %d ", arr[i]);}
 }
 
 int main(void) {
 
    int **puzzle = createBasePuzzle();
 
-   puzzle = generateSudoku(puzzle);
+   generateSudoku(puzzle);
 
-   display_screen(puzzle);
+   //display_screen(puzzle);
 
    return 0;
 }
