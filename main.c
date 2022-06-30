@@ -39,8 +39,6 @@ void swap(int **puzzle){
 
       memset(swap,0,sizeof(swap));
    }
-
-   
 }
 
 void display_screen(int **puzzle){
