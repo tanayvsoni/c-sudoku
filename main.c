@@ -109,7 +109,6 @@ void generateSudoku(int **puzzle){
 
 }
 
-
 int main(void) {
 
    int **puzzle = createBasePuzzle();
