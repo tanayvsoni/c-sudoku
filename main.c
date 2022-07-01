@@ -22,6 +22,8 @@ void rotate_arr(int *arr, int rotate_amount){
 
 void swap(int **puzzle){
    srand(time(NULL));
+
+   // Swap Rows
    int swap[2] = {0};
    
    for(int i = 0; i < 3; i++){
@@ -39,6 +41,77 @@ void swap(int **puzzle){
 
       memset(swap,0,sizeof(swap));
    }
+
+   // Swap Cols
+   for(int i = 0; i < 3; i++){
+      int upper = (i*3+3);
+      int lower = i*3;
+
+      while(swap[0] == swap[1]){
+         swap[0] = (rand() % (upper - lower)) + lower;
+         swap[1] = (rand() % (upper - lower)) + lower;
+      }
+
+      for(int j = 0; j < 9; j++){
+         int temp = puzzle[swap[0]][j];
+         puzzle[swap[0]][j] = puzzle[swap[1]][j];
+         puzzle[swap[1]][j] = temp;
+      } 
+   }
+}
+
+void generateSudoku(int **puzzle){
+   srand(time(NULL));
+
+   int *arr = malloc(sizeof(int)*9);
+
+   int choices[9] = {1,2,3,4,5,6,7,8,9};
+   int length_choices = sizeof(choices)/sizeof(int);
+
+   /*Get a array with random ints to use to make sudoku*/
+   for(int i = 0; i < 9; i++){
+      int random_index = rand() % length_choices;
+      arr[i] = choices[random_index];
+
+      for(int j = random_index; j < length_choices-1; j++){
+         choices[j] = choices[j+1];
+      }
+      length_choices -= 1;
+   }
+
+   int *last_arr = arr;
+
+   /* Fill puzzle with rotated values of array*/
+   for(int k = 0; k < 3; k++){  
+      for(int i = k*3; i < (k*3+3); i++){
+         for(int j = 0; j < 9; j++){
+            puzzle[i][j] = arr[j];
+         }
+         rotate_arr(arr, 3);
+      }
+      rotate_arr(last_arr,1);
+   }
+   
+   swap(puzzle);
+}
+
+int **createBasePuzzle(){
+   int **puzzle;
+   puzzle = malloc(sizeof(int*)*9);
+
+   int my_array[9][9] = {0};
+   int i,j;
+
+   for(i = 0; i < 9; i++){
+      puzzle[i] = malloc(sizeof(int)*9);
+      for(j = 0; j < 9; j++){
+         puzzle[i][j] = my_array[i][j];
+      }
+   }
+
+   generateSudoku(puzzle);
+    
+   return puzzle;
 }
 
 void display_screen(int **puzzle){
@@ -59,70 +132,9 @@ void display_screen(int **puzzle){
    }
 }
 
-int **createBasePuzzle(){
-   int **puzzle;
-   puzzle = malloc(sizeof(int*)*9);
-
-   int my_array[9][9] = {0};
-   int i,j;
-
-   for(i = 0; i < 9; i++){
-      puzzle[i] = malloc(sizeof(int)*9);
-      for(j = 0; j < 9; j++){
-         puzzle[i][j] = my_array[i][j];
-      }
-   }
-    
-   return puzzle;
-}
-
-void generateSudoku(int **puzzle){
-   srand(time(NULL));
-
-   int *arr = malloc(sizeof(int)*9);
-
-   int choices[9] = {1,2,3,4,5,6,7,8,9};
-   int length_choices = sizeof(choices)/sizeof(int);
-
-   /*Get a array with random ints to use to make sudoku*/
-   for(int i = 0; i < 9; i++){
-      int random_index = rand() % length_choices;
-      arr[i] = choices[random_index];
-
-      for(int j = random_index; j < length_choices-1; j++){
-         choices[j] = choices[j+1];
-      }
-
-      length_choices -= 1;
-   }
-
-   int *last_arr = arr;
-
-   /* Fill puzzle with rotated values of array*/
-   for(int k = 0; k < 3; k++){
-      
-      for(int i = k*3; i < (k*3+3); i++){
-         for(int j = 0; j < 9; j++){
-            puzzle[i][j] = arr[j];
-         }
-         rotate_arr(arr, 3);
-      }
-
-      rotate_arr(last_arr,1);
-
-   }
-   
-
-   swap(puzzle);
-
-
-}
-
 int main(void) {
 
    int **puzzle = createBasePuzzle();
-
-   generateSudoku(puzzle);
 
    display_screen(puzzle);
 
