@@ -96,13 +96,22 @@ void generateSudoku(int **puzzle){
       length_choices -= 1;
    }
 
+   int *last_arr = arr;
+
    /* Fill puzzle with rotated values of array*/
-   for(int i = 0; i < 9; i++){
-      for(int j = 0; j < 9; j++){
-         puzzle[i][j] = arr[j];
+   for(int k = 0; k < 3; k++){
+      
+      for(int i = k*3; i < (k*3+3); i++){
+         for(int j = 0; j < 9; j++){
+            puzzle[i][j] = arr[j];
+         }
+         rotate_arr(arr, 3);
       }
-      rotate_arr(arr, 3);
+
+      rotate_arr(last_arr,1);
+
    }
+   
 
    swap(puzzle);
 
