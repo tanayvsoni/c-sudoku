@@ -39,7 +39,6 @@ void rotate_arr(int *arr, int rotate_amount){
 }
 
 void swap_col(int **puzzle){
-   srand(time(NULL));
    int swap[2] = {0};
 
    // Swap Cols
@@ -61,12 +60,12 @@ void swap_col(int **puzzle){
 }
 
 void swap_rows(int **puzzle){
-   srand(time(NULL));
    int swap[2] = {0};
 
    // Swap Rows
    for(int k = 0; k < 3; k++){
       for(int swaps = 0; swaps < 3; swaps++){
+
          while(swap[0] == swap[1]){
             swap[0] = (rand() % 3) + k*3;
             swap[1] = (rand() % 3) + k*3;
@@ -82,7 +81,6 @@ void swap_rows(int **puzzle){
 }
 
 void swap_rowBlocks(int **puzzle){
-   srand(time(NULL));
    int swap[2] = {0};
 
    // Swap Row Blocks
@@ -108,8 +106,11 @@ void swap_rowBlocks(int **puzzle){
    }
 }
 
+void swap_colBlocks(int **puzzle){
+   
+}
+
 void generateSudoku(int **puzzle){
-   srand(time(NULL));
 
    int *arr = malloc(sizeof(int)*9);
 
@@ -142,7 +143,7 @@ void generateSudoku(int **puzzle){
    
    swap_rows(puzzle);
    swap_col(puzzle);
-   //swap_rowBlocks(puzzle);
+   swap_rowBlocks(puzzle);
    
    // Clear numbers to create the puzzle
    /*for(int amount_num = 81; amount_num > 30; amount_num--){
@@ -174,6 +175,7 @@ int **createBasePuzzle(){
 }
 
 int main(void) {
+   srand(time(NULL));
 
    int **puzzle = createBasePuzzle();
 
